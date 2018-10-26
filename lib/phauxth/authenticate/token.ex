@@ -82,7 +82,7 @@ defmodule Phauxth.Authenticate.Token do
         verify_token(token, token_mod, options)
       end
 
-      defp verify_token(token, token_mod, {user_context, opts}) do
+      defp verify_token(token, token_mod, %{user_context: user_context, opts: opts}) do
         try do
           with {:ok, data} <- token_mod.verify(token, opts),
                do: user_context.get_by(data)
